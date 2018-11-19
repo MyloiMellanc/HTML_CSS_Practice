@@ -1,0 +1,388 @@
+@charset "UTF-8"; /*파일 인코딩 종류*/
+
+/* 기본색상을 변수로 지정 */
+:root {
+    --main-color: #5D9AB2;
+    --accent-color: #BF6A7A;
+    --dark-color: #2B5566;
+    --text-bright-color: #fff;
+
+    --icon-color: #fff;
+    --icon-bk-color: #ddd;
+
+    --large-width: 1000px;
+}
+
+/* body selector:  body 태그 선택자
+   앞쪽에 있는 폰트부터 우선적으로 사용 */
+body {
+    /* 기본적으로 제공되는 margin을 제거 */
+    margin: 0;
+    font-family: '맑은 고딕',
+        'Apple SD Gothic Neo',
+        'sans-serif';
+}
+
+/* 콘텐츠 A - 히어로 이미지 */
+.conA {
+    text-align: center;
+    /* url을 통해서 백그라운드 이미지 생성 */
+    /* + 반투명한 검정 이미지 올리기 - 앞에 지정한 이미지가 위로 올라감 - */
+    /* linear-gradient(시작지점 색, 끝지점 색) */
+    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url(img/fruits.jpg);
+    background-position: center;
+    background-size: cover;
+
+    /* vh : 화면 높이를 100vh로 하는 단위 */
+    height: 100vh;
+
+    /* 브라우저의 높이를 글자영역보다 작게 만들면 이미지가 잘리게되는 현상을 수정 */
+    /* 최소높이는 내부의 내용보다 높게 지정 */
+    min-height: 450px;
+
+    /* 자식 요소에도 적용되는 flexible한 레이아웃 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* :root에서 변수화한 색상 사용 */
+    /* 변수를 지원하지 않는 웹브라우저에도 대응하도록 일반 변수도 미리 지정
+        (순서 유의!)*/
+    color: #fff;
+    color: var(--text-bright-color);
+}
+
+.conA img {
+    /* %는 부모요소를 기반으로 판정 */
+    width: 20%
+}
+
+.conA h1 {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    /* vw는 화면 너비를 100vw로 하는 단위(%랑 똑같이 생각하면 됨) 
+        다만 너무커지면 이상하니까 아래에서 크기를 추가로 조절*/
+    font-size: 15vw;
+    font-family: 'Montserrat', sans-serif;
+
+    /* em : 폰트크기 = 1em 으로 처리하는 단위 */
+    letter-spacing: 0.2em;
+
+    /* letter-spacing 이 맨 오른쪽 마진을 넣으므로, 
+        맨 왼쪽 마진을 따로 넣어주어야 균형이 맞음 */
+    margin-left: 0.2em;
+}
+
+.conA p {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+/* a로 구성되는 인라인 박스 생성 */
+/* 내용에 따라 크기가 결정됨 */
+.conA a {
+    /* 인라인 박스라면 위아래 마진이 출력되지 않음, 따라서 속성을 블록으로 변경 */
+    display: inline-block;
+    margin-top: 20px;
+    /* 위아래, 왼쪽오른쪽 */
+    padding: 10px 30px;
+
+    /* 실선, 테두리 두께 3픽셀, 글자와 같은 색상 */
+    border: solid 3px currentColor;
+    border-radius: 6px;
+    background-color: #BF6A7A;
+    background-color: var(--accent-color);
+    color: #fff;
+    color: var(--text-bright-color);
+
+    font-size: 14px;
+    /* 링크 밑줄 제거 */
+    text-decoration: none;
+}
+
+.conA a:hover {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+    );
+}
+
+/*동적 화면에 따른 '브레이크포인트' 지정*/
+/*
+    선택자가 같으면, 아래에 작성한 설정이 우선시된다.
+    따라서, 화면 너비가 768픽셀 이상이면 @media의 속성이 위의 속성들을 덮어쓰게 된다.
+*/
+@media (min-width: 768px) {
+    .conA h1 {
+        font-size: 115px;
+    }
+
+    .conA p {
+        font-size: 24px;
+    }
+}
+
+
+
+
+/*----------------*/
+
+.conB .container {
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+
+.conB .text {
+    text-align: center;
+
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 60px;
+}
+
+.conB h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.conB p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+
+    /* 줄 높이 지정 - 1.8배 */
+    line-height: 1.8;
+
+    /* 불투명도 - 0일때 투명 */
+    opacity: 0.8;
+}
+
+.conB a {
+    color: #5D9AB2;
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+.conB a:hover {
+    text-decoration: underline;
+}
+
+.conB .icon {
+    /*지정한 마진이 출력결과에 반영되게 하기위해, 디스플레이를 조정*/
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    font-size: 40px;
+    width: 2em; /*폰트크기의 2배*/
+    line-height: 2em;
+    border-radius: 50%; /*둥글기를 너비와 높이의 절반으로 설정하면 완전한 원이 생성됨*/
+    text-align: center;
+
+    background-color: #ddd;
+    background-color: var(--icon-bk-color);
+    color: #fff;
+    color: var(--icon-color);
+}
+
+/*브라우저 화면 너비가 768 이상일 때 조정*/
+@media (min-width: 768px) {
+    .conB .container {
+        /*플렉시블 레이아웃 기능으로 가로로 정렬*/
+        display: flex;
+
+        max-width: 1000px;
+        max-width: var(--large-width);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .conB .text {
+        /*각 요소를 1:1:1의 비율로 설정*/
+        flex: 1;
+    }
+}
+
+/*----------------*/
+
+.conC {
+    background-color: #5D9AB2;
+    background-color: var(--main-color);
+    color: #fff;
+    color: var(--text-bright-color);
+}
+
+.conC .container {
+    max-width: 1000px;
+    max-width: var(--large-width);
+    /*섹션 B 와 너비 맞추기*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.conC h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.conC p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.8;
+    opacity: 0.8;
+}
+
+.conC a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 30px;
+
+    border: solid 3px currentColor;
+    border-radius: 6px;
+    background-color: #BF6A7A;
+    background-color: var(--accent-color);
+    color: #fff;
+    color: var(--text-bright-color);
+
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.conC a:hover {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+    );
+}
+
+.conC .photo {
+    /* div class="photo" 로 구성되는 박스는 내부에 아무것도 없으므로 높이가 0이 된다 */
+    /* 이러면 이미지가 나오지 않으므로, 명시적으로 지정해주어야함 */
+    min-height: 200px;
+    background-image: url(img/note.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.conC .text {
+    /* 전체 여백 지정 - 낮은 너비일때는 아래에서 조절 */
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .conC .container {
+        display: flex;
+    }
+
+    /* 섹션 C 를 낮은 너비일 때는 가로로 조정*/
+    /* 너비 비율을 3:2 로 지정*/
+    .conC .photo {
+        flex: 3;
+    }
+    .conC .text {
+        flex: 2;
+        padding: 50px;
+    }
+}
+
+
+/*---------------*/
+
+
+.conD {
+    background-color: #5D9AB2;
+    background-color: var(--main-color);
+    color: #fff;
+    color: var(--text-bright-color);
+}
+
+.conD .container {
+    max-width: 1000px;
+    max-width: var(--large-width);
+    /*섹션 B 와 너비 맞추기*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.conD h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.conD p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.8;
+    opacity: 0.8;
+}
+
+.conD a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 30px;
+
+    border: solid 3px currentColor;
+    border-radius: 6px;
+    background-color: #BF6A7A;
+    background-color: var(--accent-color);
+    color: #fff;
+    color: var(--text-bright-color);
+
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.conD a:hover {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+    );
+}
+
+.conD .photo {
+    /* div class="photo" 로 구성되는 박스는 내부에 아무것도 없으므로 높이가 0이 된다 */
+    /* 이러면 이미지가 나오지 않으므로, 명시적으로 지정해주어야함 */
+    min-height: 200px;
+    background-image: url(img/note.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.conD .text {
+    /* 전체 여백 지정 - 낮은 너비일때는 아래에서 조절 */
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .conD .container {
+        display: flex;
+    }
+
+    /* 섹션 D 를 낮은 너비일 때는 가로로 조정*/
+    /* 너비 비율을 3:2 로 지정*/
+    .conD .photo {
+        flex: 3;
+    }
+    .conD .text {
+        flex: 2;
+        padding: 50px;
+    }
+}
+
+
+
+
+
+
+/*
+    Note
+    - 색상은 대소문자를 구별하지 않음
+    - 16진수 색은 같은 값을 반복할때 한하여 3자리 수로 지정할 수 있음
+*/
