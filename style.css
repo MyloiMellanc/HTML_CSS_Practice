@@ -294,12 +294,6 @@ body {
 /*---------------*/
 
 
-.conD {
-    background-color: #5D9AB2;
-    background-color: var(--main-color);
-    color: #fff;
-    color: var(--text-bright-color);
-}
 
 .conD .container {
     max-width: 1000px;
@@ -307,6 +301,9 @@ body {
     /*섹션 B 와 너비 맞추기*/
     margin-left: auto;
     margin-right: auto;
+
+    /*위아래 여백크기 조절*/
+    padding-top: 2px;
 }
 
 .conD h2 {
@@ -328,6 +325,9 @@ body {
     margin-top: 20px;
     padding: 10px 30px;
 
+    /*border는 여러개의 실선을 만들 수 없으므로, 
+    box-shadow로 실선 외부에 1픽셀 두께의 회색 그림자 생성*/
+    box-shadow: 0 0 0 1px #888;
     border: solid 3px currentColor;
     border-radius: 6px;
     background-color: #BF6A7A;
@@ -350,7 +350,7 @@ body {
     /* div class="photo" 로 구성되는 박스는 내부에 아무것도 없으므로 높이가 0이 된다 */
     /* 이러면 이미지가 나오지 않으므로, 명시적으로 지정해주어야함 */
     min-height: 200px;
-    background-image: url(img/note.jpg);
+    background-image: url(img/life.jpg);
     background-position: center;
     background-size: cover;
 }
@@ -363,26 +363,215 @@ body {
 @media (min-width: 768px) {
     .conD .container {
         display: flex;
+
+        /*순서 반대로*/
+        flex-direction: row-reverse;
+
+        /*위아래 너비지정*/
+        padding-top: 40px;
+        padding-bottom: 40px;
     }
 
-    /* 섹션 D 를 낮은 너비일 때는 가로로 조정*/
-    /* 너비 비율을 3:2 로 지정*/
+    /* 섹션 D는 사진 텍스트 위치 반대로, 사진은 400픽셀 고정 */
     .conD .photo {
-        flex: 3;
+        flex: 0 0 400px;
     }
     .conD .text {
-        flex: 2;
+        flex: 1;
         padding: 50px;
     }
 }
 
 
+/* FOOTER */
+footer {
+    color: #fff;
+    color: var(--text-bright-color);
+    background-color: #2B5566;
+    background-color: var(--dark-color);
+}
+
+/*푸터 안 여백 지정*/
+footer .container {
+    padding: 40px 20px;
+}
+
+/*푸터 클래스들을 통째로 정렬 : 너비 지정 안하면 모두 같은 너비를 가짐*/
+@media (min-width: 768px) {
+    footer .container {
+        display: flex;
+
+        /*100% 넘은 요소들을 밑으로 내림*/
+        flex-wrap: wrap;
+
+        /*다른 섹션과 너비 맞추기*/
+        max-width: 1000px;
+        max-width: var(--large-width);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /*가로로 정렬하고 싶은 요소를 너비가 100%가 되도록 설정
+    100% 이상의 요소들은 flex-wrap으로 인해 내려감
+    나머지, 즉 여기서 저작권은 밑으로 내려감*/
+    .footA {
+        flex: 0 0 40%;
+    }
+    .footB {
+        flex: 0 0 60%;
+    }
+    .footC {
+        flex: 0 0 100%;
+    }
+}
+
+.footA {
+    margin-bottom: 30px;
+}
+
+/*푸터 A : 사이트 정보*/
+.footA h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    letter-spacing: 0.2em;
+}
+
+.footA p {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.footA a {
+    /*링크의 밑줄을 제거하고, 주소와 같은 글자색 지정*/
+    color: inherit;
+    text-decoration: none;
+}
 
 
+.footB div {
+    padding-bottom: 20px;
+}
 
+.footB h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    /*같은 색상의 밑줄 긋기*/
+    border-bottom: solid 1px currentColor;
+    font-size: 14px;
+}
+
+/* ul 주변에는 기본적으로 여백이 들어가므로, 없애준다 */
+.footB ul {
+    margin: 0;
+    padding: 0;
+    /*리스트 마크 제거*/
+    list-style: none;
+}
+
+/*링크를 제목과 같은 색상으로 설정*/
+.footB a {
+    /*블록박스 만들기
+    이렇게 하면 <a>로 구성되는 박스의 너비가 글자에 맞춰지는 것이 아니라
+    부모요소(여기는 푸터)에 맞춰 너비를 갖게 된다*/
+    display: block;
+
+    /*이 패딩은 박스 내부에 들어감*/
+    padding: 5px;
+
+    color: inherit;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.footB a:hover {
+    background-color: rgba(0,0,0,0.3);
+}
+
+@media (min-width: 768px) {
+    /*푸터 메뉴들을 가로로 정렬
+    flex는 div개수에 상관없이 같은 비율의 너비로 분할시킨다*/
+    .footB {
+        display: flex;
+    }
+
+    /*1:1:1 비율로*/
+    .footB div {
+        flex: 1;
+    }
+
+    /*첫번째 이후부터 간격 조절
+      not : 괄호 내부와 일치하지 않을 경우 선택
+      :first-child : 첫번째 자식 선택*/
+    .footB div:not(:first-child) {
+        margin-left: 40px;
+    }
+}
+
+/*저작권 문구 중앙에 삽입*/
+.footC {
+    font-size: 12px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* Footer D */
+
+.footD {
+    margin-top: 20px;
+}
+
+/* ul 주변에는 기본적으로 여백이 들어가므로, 없애준다 */
+.footD ul {
+    /*가로로 정렬*/
+    /*너비 관계없이 항상 가로로 출력하므로 media 사용 안함*/
+    display: flex;
+
+    margin: 0;
+    padding: 0;
+    /*리스트 마크 제거*/
+    list-style: none;
+}
+
+/*링크를 제목과 같은 색상으로 설정*/
+.footD a {
+    /*블록박스 만들기
+    이렇게 하면 <a>로 구성되는 박스의 너비가 글자에 맞춰지는 것이 아니라
+    부모요소(여기는 푸터)에 맞춰 너비를 갖게 된다*/
+    display: block;
+
+    color: inherit;
+    font-size: 16px;
+    text-decoration: none;
+
+    /*둥근 테두리로 아이콘 감싸기*/
+    padding: 0;
+    border: solid 1px currentColor;
+    width: 2em;
+    line-height: 2em;
+    border-radius: 50%;
+    text-align: center;
+
+    /*간격 벌리기*/
+    margin-right: 8px;
+}
+
+.footD a:hover {
+    background-color: rgba(0,0,0,0.3);
+}
 
 /*
     Note
     - 색상은 대소문자를 구별하지 않음
     - 16진수 색은 같은 값을 반복할때 한하여 3자리 수로 지정할 수 있음
 */
+
+
+
+
+
