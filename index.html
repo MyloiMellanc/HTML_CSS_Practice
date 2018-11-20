@@ -26,8 +26,39 @@
         </style>
 
         <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script> <!--아이콘 폰트 스크립트-->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            //헤더 메뉴 토글버튼 애니메이션 실행
+            $(function() {
+                $(".headC").click(function() {
+                    $(".headB").slideToggle();
+                })
+            });
+        </script>
     </head>
     <body>
+        <header>
+            <div class="container">
+                <div class="container-small">
+                    <a href="index.html" class="headA">LOGGER</a>
+
+                    <!--큰 화면에서는 보이지 않는 토글버튼 추가-->
+                    <button type="button" class="headC">
+                        <span class="fas fa-bars" title="MENU"></span>
+                    </button>
+                </div>
+
+                <nav class="headB">
+                    <ul>
+                        <li><a href="index.html">TOP</a></li>
+                        <li><a href="contents.html">콘텐츠</a></li>
+                        <li><a href="about.html">소개</a></li>
+                        <li><a href="contact.html">문의</a></li>
+                    </ul>                    
+                </nav>
+            </div>
+        </header>
+
         <section class="conA"> <!--부모 요소-->
             <div class="container"> <!--자식 요소-->
                 <!-- <img src="img/p02.jpg" alt=""> -->

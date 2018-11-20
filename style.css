@@ -565,6 +565,140 @@ footer .container {
     background-color: rgba(0,0,0,0.3);
 }
 
+
+
+/*------ HEADER -------*/
+
+header {
+    /*헤더를 히어로이미지 위에 중첩시키기*/
+    /*헤더가 다른 레이어로 나뉘게되어, 포지션이 지정되지 않은 다른 요소위에 중첩됨*/
+    /*포지션을 지정하지 않은 다른 요소들은 헤더를 존재하지 않는 것으로 인식*/
+    position: absolute;
+    /*다른 레리어로 옮겨진 헤더의 위치를 브라우저 화면 기준으로 다시 지정*/
+    top: 0;
+    left: 0;
+    /*헤더가 가장 위에 보이게 지정 + 너비를 꽉채우도록 함*/
+    z-index: 100;
+    width: 100%;
+    /*반투명*/
+    background-color: rgba(255,255,255,0.9);
+}
+
+.headA {
+    /*사이트 이름박스 크기 조절*/
+    display: inline-block;
+    line-height: 70px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    background-color: #5D9AB2;
+    background-color: var(--main-color);
+    color: #fff;
+    color: var(--text-bright-color);
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+/* ul 주변에는 기본적으로 여백이 들어가므로, 없애준다 */
+.headB ul {
+    margin: 0;
+    padding: 0;
+    /*리스트 마크 제거*/
+    list-style: none;
+}
+
+/*링크를 제목과 같은 색상으로 설정*/
+.headB a {
+    /*블록박스 만들기
+    이렇게 하면 <a>로 구성되는 박스의 너비가 글자에 맞춰지는 것이 아니라
+    부모요소(여기는 푸터)에 맞춰 너비를 갖게 된다*/
+    display: block;
+
+    /*이 패딩은 박스 내부에 들어감*/
+    padding: 15px;
+
+    color: inherit;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.headB a:hover {
+    background-color: rgba(0,0,0,0.3);
+}
+
+@media (min-width: 768px) {
+    /*두 요소를 양쪽 끝에 배치*/
+    header .container {
+        /*둘 다 너비를 따로 지정하지 않아 콘텐츠 크기에 맞춰짐*/
+        display: flex;
+
+        /*세로 방향으로 중앙 정렬 및 왼쪽오른쪽 끝방향에 위치하도록*/
+        align-items: center;
+        justify-content: space-between;
+
+        /*너비 맞추기*/
+        max-width: 1000px;
+        max-width: var(--large-width);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /*큰 화면에서는 리스트를 가로로 조정*/
+    .headB ul {
+        display: flex;
+    }
+}
+
+/*작은화면 전용 설정: 토글버튼 위치 조정*/
+@media (max-width: 768px) {
+    header .container-small {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /*토글 버튼 테두리와 배경 제거*/
+    .headC {
+        /*여백*/
+        margin-right: 10px;
+        padding: 0;
+        /*테두리*/
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 28px;
+        opacity: 0.5;
+        /*마우스를 댔을 때 커서를 손 모양으로*/
+        cursor: pointer;
+    }
+
+    .headC:hover {
+        opacity: 0.3;
+    }
+
+    /*버튼 누르기 전까지 보이지 않기*/
+    .headB {
+        display: none;
+    }
+}
+
+
+/*큰화면 전용 설정: 토글 버튼 없애기*/
+@media (min-width: 768px) {    
+    .headC {
+        display: none;
+    }
+
+    /*항상 메뉴가 보이게 설정
+    block: 보이게 만듬
+    !important: 우선적으로 적용됨*/
+    .headB {
+        display: block !important;
+    }
+}
+
 /*
     Note
     - 색상은 대소문자를 구별하지 않음
