@@ -9,9 +9,37 @@
 
     --icon-color: #fff;
     --icon-bk-color: #ddd;
-
+    --gray-color: #ddd;
     --large-width: 1000px;
+
+    --middle-width: 800px;
 }
+
+/*기본설정 : 브레이크 포인트마다 폰트 크기 지정*/
+@media (max-width: 599px) {
+    :root {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 799px) and (min-width: 600px) {
+    :root {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 800px) {
+    :root {
+        font-size: 18px;
+    }
+}
+
+/*기본 폰트 설정은 폰트 크기를 따로 지정하지 않은 요소에 영향을 줄 수 있으므로, 
+    영향을 주지 않게 바디의 폰트 사이즈는 브라우저의 기본 폰트 크기인 16픽셀로 설정*/
+body {
+    font-size: 16px;
+}
+
 
 /* body selector:  body 태그 선택자
    앞쪽에 있는 폰트부터 우선적으로 사용 */
@@ -51,6 +79,16 @@ body {
     color: #fff;
     color: var(--text-bright-color);
 }
+
+/*list-a 에서 사용하는 형태는 따로 덮어쓰기*/
+/*여러개의 클래스 이름을 공백을 넣지않고 입력하면 AND 스타일의 효과가 적용
+    conA 이면서 compact인 요소만 적용된다*/
+.conA.compact {
+    height: 450px;
+    min-height: 0;
+    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url(img/balloon.jpg);
+}
+
 
 .conA img {
     /* %는 부모요소를 기반으로 판정 */
@@ -584,6 +622,15 @@ header {
     background-color: rgba(255,255,255,0.9);
 }
 
+/*콘텐츠 페이지에서는 헤더 중첩을 제거*/
+.nohero header {
+    position: static;
+
+    /*밑줄 넣기*/
+    border-bottom: solid 1px #ddd;
+    border-bottom: solid 1px var(--gray-color);
+}
+
 .headA {
     /*사이트 이름박스 크기 조절*/
     display: inline-block;
@@ -697,6 +744,287 @@ header {
     .headB {
         display: block !important;
     }
+}
+
+
+
+
+
+/*----------*/
+/*CONTENTS.HTML*/
+
+.post .container {
+    padding: 30px 10px;
+
+    max-width: 800px;
+    max-width: var(--middle-width);
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 2rem : 기본 폰트 크기의 2배 */
+.post h1 {
+    /*제목 앞에 빨간 바 추가*/
+    padding-left: 0.5rem;
+    border-left: solid 0.75rem #BF6A7A;
+    border-left: solid 0.75rem var(--accent-color);
+
+    font-size: 2rem;
+}
+
+.post p {
+    font-size: 1rem;
+
+    /*줄 높이는 폰트 크기의 2배*/
+    line-height: 2;
+}
+
+.post img {
+    /*이미지를 기사의 너비에 맞게 출력*/
+    /*width가 아닌 max-width를 100%로 지정하면
+    기사의 너비가 이미지보다 작을 때, 이미지크기를 축소시킨다
+    기사의 너비가 원래 이미지보다 크면, 원래 이미지 크기대로 출력 */
+    max-width: 100%;
+}
+
+
+
+
+/* 콘텐츠 페이지 : 빵 부스러기 리스트 */
+.bread ol {
+    /*가로형으로 설정*/
+    display: flex;
+
+    margin: 0;
+    padding: 0;
+
+    /*리스트 마크 제거*/
+    list-style: none;
+}
+
+/*링크를 제목과 같은 색상으로 설정*/
+.bread a {
+    /*블록박스 만들기
+    이렇게 하면 <a>로 구성되는 박스의 너비가 글자에 맞춰지는 것이 아니라
+    부모요소(여기는 푸터)에 맞춰 너비를 갖게 된다*/
+    display: block;
+
+    /*이 패딩은 박스 내부에 들어감*/
+    padding: 5px;
+
+    color: inherit;
+    /*기본 폰트 크기를 기반으로한 폰트 크기 설정*/
+    font-size: 0.875rem;
+    text-decoration: none;
+}
+
+/*구분 문자를 불러와서 각각의 간격 만들기*/
+.bread a:after {
+    margin-left: 10px;
+    content: '\f054';
+    font-family: "FontAwesome";
+    opacity: 0.3;
+}
+
+.bread a:hover {
+    background-color: rgba(0,0,0,0.3);
+}
+
+
+
+
+/*---------------*/
+/*ABOUT*/
+
+
+.history {
+    background-color: #5D9AB2;
+    background-color: var(--main-color);
+    color: #fff;
+    color: var(--text-bright-color);
+}
+
+.history .container {
+    max-width: 1000px;
+    max-width: var(--large-width);
+    /*섹션 B 와 너비 맞추기*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.history h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.history .photo {
+    /* div class="photo" 로 구성되는 박스는 내부에 아무것도 없으므로 높이가 0이 된다 */
+    /* 이러면 이미지가 나오지 않으므로, 명시적으로 지정해주어야함 */
+    min-height: 300px;
+    background-image: url(img/plant.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+/*연월과 이벤트 그룹을 실선으로 구분*/
+/*HISTORY 밑의 맨 윗선*/
+.history table {
+    border-collapse: collapse;
+    border-top: solid 1px #ddd;
+    border-top: solid 1px var(--gray-color);
+
+    font-size: 0.875rem;
+}
+
+.history th,
+.history td {
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
+
+    border-bottom: solid 1px #ddd;
+    border-bottom: solid 1px var(--gray-color);
+}
+
+/*연월의 줄바꿈 막기*/
+.history th {
+    padding-right: 1rem;
+    text-align: left;
+    word-break: keep-all;
+}
+
+@media (min-width: 768px) {
+    .history .container {
+        display: flex;
+    }
+
+    /* 섹션 C 를 낮은 너비일 때는 가로로 조정*/
+    /* 너비 비율을 3:2 로 지정*/
+    .history .photo {
+        flex: 3;
+    }
+    .history .text {
+        flex: 2;
+        padding: 50px;
+    }
+}
+
+
+
+/*----------------*/
+/*CONTACT*/
+
+/*전화 및 이메일 버튼박스 만들기*/
+.contact {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: solid 1px #ddd;
+    border: solid 1px var(--gray-color);
+    text-align: center;
+}
+
+/*아이콘 동그랗게 만들기*/
+.contact span {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+    width: 2em;
+    line-height: 2em;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #5D9AB2;
+    background-color: var(--main-color);
+    color: #fff;
+    color: var(--icon-color);
+}
+
+.contact h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.contact a {
+    font-size: 1.4rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+/*래핑된 박스를 가로로 정렬*/
+@media (min-width: 768px) {
+    .contact-wrap {
+        display: flex;
+    }
+
+    .contact {
+        flex: 1;
+    }
+
+    .contact:first-child {
+        margin-right: 20px;
+    }
+}
+
+
+/*문의 페이지: 제목 박스 만들기*/
+.location h2 {
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #5D9AB2;
+    background-color: var(--main-color);
+    color: #fff;
+    color: var(--text-bright-color);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/*문의 페이지: 지도 프레임 맞추기*/
+.location iframe {
+    padding-top: 2px;
+    width: 100%;
+    height: 400px;
+
+    /*지도 아래의 의도치 않은 여백 제거*/
+    vertical-align: bottom;
+}
+
+/*----------------*/
+/*list-a*/
+
+/*카드 형태 만들기*/
+.listA a {
+    margin: 10px;
+    display: block;
+    border: solid 1px #ddd;
+    border: solid 1px var(--gray-color);
+    color: inherit;
+    text-decoration: none;
+}
+
+.listA a:hover {
+    opacity: 0.8;
+}
+
+.listA .photo {
+    min-height: 150px;
+    background-position: center;
+    background-size: cover;
+}
+
+.listA text {
+    margin: 10px;
+}
+
+/*너비 관계없이 일정하게 출력하고 싶을 땐 px 사용*/
+.listA h2 {
+    font-size: 18px;
+}
+
+.listA p {
+    font-size: 14px;
+    opacity: 0.8;
 }
 
 /*
